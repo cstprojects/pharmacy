@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<link rel="stylesheet" href="/pharmacy/css/main.css" />
-<script type="text/javascript" src="js/functions.js"></script>
-<link rel = "stylesheet" type = "text/css" href = "/pharmacy/css/global.css">
-<script type ="text/javascript">
-</script>
+<link rel="stylesheet" href="css/main.css" />
+<link rel = "stylesheet" type = "text/css" href = "css/global.css">
 <title>pharmacy</title>
 
 </head>
@@ -37,7 +34,7 @@
 		</div>
 	</div>	
 	
-	
+	<script type="text/javascript" src="js/search.js"></script>
 </body>
 
 </html>

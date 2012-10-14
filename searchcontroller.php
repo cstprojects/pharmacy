@@ -15,7 +15,7 @@ foreach($res as $value): ?>
 		<div class="details" id="more_details">	
 		<ul class = "moredetailsinfolist" id ="moredetails_list">
 			<li class="moreinfo" id ="moredetaillink">
-				<?php print "<a href = products/?id=$value->productID >Read More & Buy</a>" ?>
+				<?php print "<a href = products.php?id=$value->productID >Read More & Buy</a>" ?>
  			</li>
 		</ul>
 	</div>	

@@ -1,8 +1,8 @@
+<!doctype html>
 <html lang ="en">
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href = "css/auth.css">
-	<script type="text/javascript" src = "js/functions.js"></script>
 	<title>Pharmacy</title>
 </head>
 <body id = "body">	
@@ -15,7 +15,7 @@
 		<?php print $reg_form; ?>
 	</div>
 	<div id = "message"></div>
-	
+<script type="text/javascript" src = "js/authentication.js"></script>	
 </div>	
 </body>
 </html>

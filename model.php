@@ -17,7 +17,7 @@ if(!empty($username) || !empty($password)){
 		
 		$userid = get_id_field($query);
 		$_SESSION['user_id'] = $userid;
-		header('Location: /pharmacy/content');
+		header('Location: home.php');
 		
 		}else{
 			$message = "Invalid Username/password";
@@ -138,3 +138,30 @@ function get_product_by_id($id){
 
 
 
+function last_added(){
+	
+	
+	$query = "SELECT TOP 10 * FROM Products"; 
+	$result = db_result($query);
+	
+	$data = array();
+	
+	while($row = sqlsrv_fetch_object($result)){
+	
+		
+		$data[] = $row;
+	
+	}
+	
+	return $data;
+	
+
+}
+
+function load_news_xml(){
+	
+	$feed = simplexml_load_file('http://drugtopics.modernmedicine.com/drugtopics/drugtopics.rss?id=47448');
+	
+	return $feed;
+
+}

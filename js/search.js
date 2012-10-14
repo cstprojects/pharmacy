@@ -1,4 +1,4 @@
-window.onload = function(){
+(function(){
 var search = function(){
 
 var form = document.getElementById("search");
@@ -33,4 +33,4 @@ form.onkeyup = function() {
 
 search();
 
-}
+})();

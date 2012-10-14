@@ -56,7 +56,7 @@ static $conn;
 	if(empty($conn)){
 		
 		$conn = sqlsrv_connect(
-		server,
+		DB_SERVER,
 		array('database'=>'pharmacy')
 		);
 		

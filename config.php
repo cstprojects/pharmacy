@@ -1,3 +1,3 @@
 <?php
 
-define('server','WIN-QDKCJMOBOM4\SQLEXPRESS');
+define('DB_SERVER','WIN-QDKCJMOBOM4\SQLEXPRESS');

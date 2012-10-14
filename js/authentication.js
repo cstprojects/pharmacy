@@ -1,4 +1,4 @@
-window.onload = function() {
+(function(){
 
 var body =  document.getElementById("body");
 	
@@ -81,6 +81,6 @@ var body =  document.getElementById("body");
 		 return false;
     };
     
-};
+})();
 
  
