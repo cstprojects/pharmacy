@@ -1,0 +1,73 @@
+*{
+
+margin:0;
+padding:0;
+font-family:Arial, Helvetica, sans-serif;
+
+}
+
+.top_10{
+
+	width:300px;
+	float:left;
+	font:15px bold Arial;
+	margin-top:-100px;
+	box-shadow:0px 3px 8px silver;
+}
+
+.last_added_product{
+	
+	margin:20px;
+	border-bottom:1px solid silver;
+	
+}
+
+
+
+.last_added_header{
+
+	padding:10px;
+	border:1px solid silver;
+	text-align:center;
+	background:#0066FF;
+	opacity:0.4;
+	color:white;
+
+
+}
+
+
+a:link, a:visited{
+	
+	color:blue;
+	text-decoration:none;
+
+}
+
+
+.news_header{
+	padding:10px;
+	border:1px solid silver;
+	text-align:center;
+	background:#0066FF;
+	opacity:0.4;
+	color:white;
+}
+
+.news_feed{
+box-shadow:0px 3px 8px silver;
+width:250px;
+position:absolute;
+right:0px;
+top:50px;
+
+
+}
+
+.news_info{
+	
+	margin:20px;
+	border-bottom:1px solid silver;
+
+}
+	
