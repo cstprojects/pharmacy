@@ -5,6 +5,6 @@
 	<div>
 	<input type = "password" name = "password"  placeholder = "password">
 	</div>
-	<input type = "submit" value = "Sign In">
+	<input class = "btn btn-info" type = "submit" value = "Sign In">
 </form>	
 

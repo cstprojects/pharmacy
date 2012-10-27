@@ -1,25 +1,29 @@
 <?php foreach($result as $value): ?>
 	
-<div class = "product_info">
-<div class = "product_img">
+<div class = "container-fluid">
+<div class = "row-fluid">
+	<div class = "span2">
 		<img  src = <?php print $value->productIMG ?>>
+	</div>
+	<div class = "span6">
+		<h5 id = "productName"><?php print $value->productName; ?></h5>
+		<div class = "product_price"> 
+				<p id = "productPrice">USD <?php print $value->Price ?></p>
 		</div>
-	<table border = "1">
-		<tr>
-			<td>Name</td>
-			<th><?php print $value->productName; ?></th>
-		</tr>
-		<tr>
-			<td>Category</td>
-		</tr>
-		<tr>
-			<td>Description</td>
-			<td><?php print $value->productDetails; ?> </td>
-		</tr>
-		<tr>
-			<td>Price</td>
-		</tr>
-	</table>	
+	</div>
+	<div class = "span7">
+		<?php echo embed('tpl/addtocart.tpl.php',array()); ?>
+	</div>
+	<div class = "span9">
+		<div class = "product_description">
+		<label>
+		<h5>Product Description</h5>
+		</label>
+		<p><?php print $value->productDetails; ?></p>
+		</div>
+	</div>
+</div>	
+
 </div>
 <?php endforeach; ?>	
 	

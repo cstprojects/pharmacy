@@ -17,5 +17,5 @@
 			<div>
 				<input type ="text" name = "mobile" placeholder = "Mobile phone number" >
 			</div>
-			<input type ="submit" value = "create account" />
+			<input class = "btn btn-info" type ="submit" value = "Create account" />
 </form>
