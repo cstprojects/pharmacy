@@ -12,7 +12,6 @@ $row_count = sqlsrv_num_rows($stmt);
 return $row_count;
 }
 
-
 function get_id_field($query){
 	$stmt = sqlsrv_query(db_connect(),$query);
 	
@@ -25,6 +24,16 @@ function get_id_field($query){
 
 }
 
+function escape_string($string) {
+  return str_replace("'", "''", $string);
+}
+
+function sqlsrv_escape($data) {
+    if(is_numeric($data))
+        return $data;
+    $unpacked = unpack('H*hex', $data);
+    return '0x' . $unpacked['hex'];
+}
 
 function current_file(){
 	
@@ -48,7 +57,6 @@ function embed($file,$vars){
 	return $content;
 }
 
-
 function db_connect(){
 
 static $conn;
@@ -66,7 +74,11 @@ static $conn;
 	
 }
 
+function get_numbers_from_string($string){
 
+echo preg_replace("/[^0-9\.]/", '', $string);
+
+}
 
 function db_result($query){
 	
@@ -75,8 +87,6 @@ function db_result($query){
 	return $result;
 	
 }
-
-
 
 function db_insert($table, $data) {
   $query  = "INSERT INTO %s (%s) VALUES ('%s')";

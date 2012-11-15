@@ -1,6 +1,6 @@
 <?php foreach($result as $value): ?>
 	<div>
-		<p id =""> <?php print $value->userid; ?> </p>
+		<p> <?php print $value->userid; ?> </p>
 	</div>
 	
 	<div>

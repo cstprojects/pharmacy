@@ -24,13 +24,14 @@
 .suggestion li {
 
 	list-style-type:none;
-	border-bottom:1px solid silver;
+	display:inline;
+	
 
 }
 
 .suggestion li:hover{
 	
-	background:silver;
+	background:none;
 
 }
 
@@ -43,5 +44,14 @@ text-align:left;
 	
 	display:inline;
 	list-style-type:none;
+
+}
+
+
+#cart_link{
+	
+	text-decoration:none;
+	color:white;
+
 
 }

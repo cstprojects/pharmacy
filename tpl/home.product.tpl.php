@@ -33,7 +33,7 @@
 </div>
 
 <div id = "transaction"></div>
-	<script type = "text/javascript" src = "js/transaction.js"></script>
+	<script type = "text/javascript" src = "js/cart.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>	
 	<script type="text/javascript" src="js/search.js"></script>
