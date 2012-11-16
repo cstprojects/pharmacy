@@ -2,91 +2,6 @@
 
 //include 'functions.php';
 
-function login($username,$password){
-
-$message = null;
-
-session_start();
-
-if(!empty($username) || !empty($password)){
-		
-	 $password = md5($password);
-	 
-	 $query = "SELECT * FROM users WHERE username = '$username' AND passwordone = '$password'";
-	 $rows = count_rows($query);
-	 
-	 if($rows==1){
-		
-		$userid = get_id_field($query);
-		$_SESSION['user_id'] = $userid;
-		header('Location: home.php');
-		
-		}else{
-			$message = "Invalid Username/password";
-			echo "<p class = 'alert alert-error'> $message </p>";
-		
-		}
-	}else{
-			 $message = "Enter Your Username and Password";
-			  echo "<p class = 'alert alert-error'> $message </p>";
-		}
-		
-}
-
-
-
-function get_drug($drug){
-
-
-$query = "SELECT productID, productIMG,productName FROM Products 
-		  WHERE productName LIKE '%$drug%' OR productDetails LIKE '%$drug%'";
-	$result = db_result($query);
-	
-	$data = array();
-	
-	while($row = sqlsrv_fetch_object($result)){
-		
-		$data[] = $row;
-	}	
-	
-	return $data;
-	
-}
-
-
-function loggedin(){	
-
-	if(isset($_SESSION['user_id'])&&!empty($_SESSION['user_id'])){
-	
-		$loggedinuserid = $_SESSION['user_id'];
-		$query = "SELECT fullname FROM users WHERE userid ='$loggedinuserid'";
-		$stmt = db_result($query);
-		
-		while($row = sqlsrv_fetch_object($stmt)){
-			$name = $row->fullname;
-
-		}	
-	
-	}else{
-
-		header('Location: /pharmacy');
-
-	}
-	
-	return $name;
-		
-}
-
-function userlogout(){
-
-	session_start();
-	session_destroy();
-
-}
-
-
-
-
 function adduser($username,$passwordone,$passwordtwo,$fullname,$email,$mobile){
 
 if(empty($username) || empty($passwordone) || empty($passwordtwo) || empty($fullname) || empty($email) || empty($mobile)){
@@ -131,6 +46,88 @@ if(empty($username) || empty($passwordone) || empty($passwordtwo) || empty($full
 		}		
 	}
 }
+
+function login($username,$password){
+
+$message = null;
+
+session_start();
+
+if(!empty($username) || !empty($password)){
+		
+	 $password = md5($password);
+	 
+	 $query = "SELECT * FROM users WHERE username = '$username' AND passwordone = '$password'";
+	 $rows = count_rows($query);
+	 
+	 if($rows==1){
+		
+		$userid = get_id_field($query);
+		$_SESSION['user_id'] = $userid;
+		header('Location: home.php');
+		
+		}else{
+			$message = "Invalid Username/password";
+			echo "<p class = 'alert alert-error'> $message </p>";
+		
+		}
+	}else{
+			 $message = "Enter Your Username and Password";
+			  echo "<p class = 'alert alert-error'> $message </p>";
+		}
+		
+}
+
+function loggedin(){	
+
+	if(isset($_SESSION['user_id'])&&!empty($_SESSION['user_id'])){
+	
+		$loggedinuserid = $_SESSION['user_id'];
+		$query = "SELECT fullname FROM users WHERE userid ='$loggedinuserid'";
+		$stmt = db_result($query);
+		
+		while($row = sqlsrv_fetch_object($stmt)){
+			$name = $row->fullname;
+
+		}	
+	
+	}else{
+
+		header('Location: /pharmacy');
+
+	}
+	
+	return $name;
+		
+}
+
+function userlogout(){
+
+	session_start();
+	session_destroy();
+
+}
+
+
+//search
+function get_drug($drug){
+
+
+$query = "SELECT productID, productIMG,productName FROM Products 
+		  WHERE productName LIKE '%$drug%' OR productDetails LIKE '%$drug%'";
+	$result = db_result($query);
+	
+	$data = array();
+	
+	while($row = sqlsrv_fetch_object($result)){
+		
+		$data[] = $row;
+	}	
+	
+	return $data;
+	
+}
+
 
 function get_products(){
 	
