@@ -1,3 +1,6 @@
 <?php
 
-define('DB_SERVER','WIN-QDKCJMOBOM4\SQLEXPRESS');
+define('DB_HOST', '127.0.0.1');
+define('DB_NAME', 'pharmacy');
+define('DB_USER', 'root');
+define('DB_PASS', '');

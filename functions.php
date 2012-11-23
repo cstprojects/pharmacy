@@ -3,37 +3,29 @@
 include 'config.php';
 
 function count_rows($query){
+	
+	$result = db_result($query);
+	
+	return mysqli_num_rows($result);
+}
 
-$params = array();
-$options =  array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
-$stmt = sqlsrv_query(db_connect(),$query,$params,$options);
-$row_count = sqlsrv_num_rows($stmt);
-
-return $row_count;
+function get_field($result,$row,$field) { 
+  if($result->num_rows==0) return 'unknown'; 
+  $result->data_seek($row);
+  $ceva=$result->fetch_assoc(); 
+  $rasp=$ceva[$field]; 
+  return $rasp; 
 }
 
 function get_id_field($query){
-	$stmt = sqlsrv_query(db_connect(),$query);
 	
-	if( sqlsrv_fetch( $stmt ) === false) {
-     die( print_r( sqlsrv_errors(), true));
-	 }
-	 $id = sqlsrv_get_field($stmt,0);
-	 
-	 return $id;
+	$id = mysqli_fetch_field_direct(db_result($query),1);
+	
+	return $id;
 
 }
 
-function escape_string($string) {
-  return str_replace("'", "''", $string);
-}
 
-function sqlsrv_escape($data) {
-    if(is_numeric($data))
-        return $data;
-    $unpacked = unpack('H*hex', $data);
-    return '0x' . $unpacked['hex'];
-}
 
 function current_file(){
 	
@@ -57,22 +49,21 @@ function embed($file,$vars){
 	return $content;
 }
 
-function db_connect(){
+function db_connect() {
+	  static $conn;
 
-static $conn;
-	
-	if(empty($conn)){
-		
-		$conn = sqlsrv_connect(
-		DB_SERVER,
-		array('database'=>'pharmacy')
-		);
-		
+	  if (empty($conn)) {
+	    $conn = mysqli_connect(
+	      DB_HOST,
+	      DB_USER,
+	      DB_PASS,
+	      DB_NAME
+	    );
+	  }
+
+	  return $conn;
 	}
-	
-	return $conn;
-	
-}
+
 
 function get_numbers_from_string($string){
 
@@ -82,9 +73,8 @@ echo preg_replace("/[^0-9\.]/", '', $string);
 
 function db_result($query){
 	
-	$result = sqlsrv_query(db_connect(),$query);
 	
-	return $result;
+	  return mysqli_query(db_connect(),$query);
 	
 }
 

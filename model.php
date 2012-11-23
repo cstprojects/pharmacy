@@ -58,11 +58,15 @@ if(!empty($username) || !empty($password)){
 	 $password = md5($password);
 	 
 	 $query = "SELECT * FROM users WHERE username = '$username' AND passwordone = '$password'";
+	 $result = db_result($query);
 	 $rows = count_rows($query);
+	 $row = mysqli_fetch_assoc($result);
+	 $userid = $row['userid'];
+	 
+	 echo $userid;
 	 
 	 if($rows==1){
 		
-		$userid = get_id_field($query);
 		$_SESSION['user_id'] = $userid;
 		header('Location: home.php');
 		
@@ -86,7 +90,7 @@ function loggedin(){
 		$query = "SELECT fullname FROM users WHERE userid ='$loggedinuserid'";
 		$stmt = db_result($query);
 		
-		while($row = sqlsrv_fetch_object($stmt)){
+		while($row = mysqli_fetch_object($stmt)){
 			$name = $row->fullname;
 
 		}	
@@ -113,13 +117,13 @@ function userlogout(){
 function get_drug($drug){
 
 
-$query = "SELECT productID, productIMG,productName FROM Products 
+$query = "SELECT productID, productIMG,productName,Price FROM Products 
 		  WHERE productName LIKE '%$drug%' OR productDetails LIKE '%$drug%'";
 	$result = db_result($query);
 	
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 		
 		$data[] = $row;
 	}	
@@ -131,11 +135,11 @@ $query = "SELECT productID, productIMG,productName FROM Products
 
 function get_products(){
 	
-	$query = "SELECT * FROM Products ORDER BY NEWID()";
+	$query = "SELECT * FROM Products";
 	$result = db_result($query);
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 	
 		$data[] = $row;
 	}
@@ -150,7 +154,7 @@ function get_product_by_id($id){
 	
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 		
 		$data[] = $row;
 	}
@@ -169,7 +173,7 @@ function get_products_by_category($id){
 	
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 		
 		$data[] = $row;
 	}
@@ -183,7 +187,7 @@ function get_category(){
 	$result = db_result($query);
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 		
 		$data[] = $row;
 	}
@@ -195,12 +199,12 @@ function get_category(){
 //last added product selects 16 item..
 function last_added(){
 	
-	$query = "SELECT TOP 16 * FROM Products"; 
+	$query = "SELECT * FROM Products"; 
 	$result = db_result($query);
 	
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 	
 		
 		$data[] = $row;
@@ -213,16 +217,16 @@ function last_added(){
 }
 
 
-function get_transaction_data(){
+function get_cart_data(){
 
 
 	$user = $_SESSION['user_id'];
-	$query = "SELECT * FROM Transactions WHERE userid = '$user'";
+	$query = "SELECT * FROM cart WHERE userid = '$user'";
 	$row = count_rows($query);
 	
 	$result = db_result($query);
 	$data = array();
-	while($rows = sqlsrv_fetch_object($result)){
+	while($rows = mysqli_fetch_object($result)){
 		
 		$data[] = $rows;
 	
@@ -234,41 +238,42 @@ function get_transaction_data(){
 }
 
 
-function addtransaction($productname,$productprice,$productquantity,$user_id){
+function addtocart($productname,$productprice,$productquantity){
 		
 	session_start();
 	$user = $_SESSION['user_id'];
-	$query = "SELECT * FROM Transactions WHERE productName = '$productname' AND userid = '$user'";
+	$query = "SELECT * FROM cart WHERE productName = '$productname' AND userid = '$user'";
 	$row = count_rows($query);
 	if($row == 0){
 		
 		
-	$transaction = db_insert('Transactions',array(
+	$cart = db_insert('cart',array(
 		
 		'productName'=>$productname,
 		'productPrice'=>$productprice,
 		'productQuantity'=>$productquantity,
-		'userid'=>$user_id
+		'userid'=>$_SESSION['user_id']
 	
-	));	
+	));
+			
 		
 	}else{
 	
-	$query = "UPDATE Transactions SET productQuantity = '$productquantity' WHERE productName = '$productname' AND userid = '$user'";
+	$query = "UPDATE cart SET productQuantity = '$productquantity' WHERE productName = '$productname' AND userid = '$user'";
 	$result = db_result($query);
 		
 	}	
 
 }
 
-function cheaktranrow(){
+function cheakrow(){
 	session_start();
 	$user = $_SESSION['user_id'];
-	$query = "SELECT * FROM Transactions WHERE userid = '$user'";
+	$query = "SELECT * FROM cart WHERE userid = '$user'";
 	$row = count_rows($query);
 	$result = db_result($query);
 	$data = array();
-	while($rows = sqlsrv_fetch_object($result)){
+	while($rows = mysqli_fetch_object($result)){
 		
 		$data[] = $rows;
 	
@@ -287,6 +292,14 @@ function cheaktranrow(){
 	
 }
 
+
+function trash($id){
+
+	$query = "DELETE FROM cart WHERE cartID =".$id;
+	$result = db_result($query);
+}
+
+
 function get_user_loggedin_id(){
 	
 	print_r($_SESSION['user_id']);
@@ -300,7 +313,7 @@ function get_user_info(){
 	$result = db_result($query);
 	$data = array();
 	
-	while($row = sqlsrv_fetch_object($result)){
+	while($row = mysqli_fetch_object($result)){
 		
 		$data[]=$row;
 	
@@ -398,9 +411,9 @@ if(!empty($creditcardnumber)||
 		
 		
 			$userid = $_SESSION['user_id'];
-			$query = "SELECT SUM(productPrice) FROM Transactions WHERE  userid = $userid";
+			$query = "SELECT SUM(productPrice) FROM cart WHERE  userid = $userid";
 			$result = db_result($query);
-			$row = sqlsrv_fetch_array($result);
+			$row = mysqli_fetch_array($result);
 			
 			for($i=0; $i<1; $i++){
 				
@@ -409,14 +422,47 @@ if(!empty($creditcardnumber)||
 			}
 			
 			if($amount >= $nums){
-	
-				
-				$query = "DELETE FROM Transactions";
-				$result = db_result($query);
 			
+				$date = date("Y-m-j");
+			
+				$query = "SELECT * FROM cart";
+				$result = db_result($query);
 				
+				while($row = mysqli_fetch_assoc($result)){
+			
+				$name = $row['productName'];
+				$quantity = $row['productQuantity'];
+				
+				$order = db_insert('orders',array(
+					
+					'productName'=>$name,
+					'date'=>$date,
+					'userid'=>$_SESSION['user_id'],
+					'productQuantity'=>$quantity
+					
+				));
+				
+				}
 	
-				echo "<p class = 'alert alert-success'>product(s) will arrive as soon as possible </p>";
+				
+				$query = "DELETE FROM cart";
+				$result = db_result($query);
+				
+				$bill = db_insert('bill',array(
+					
+					'creditcardtype'=>$creditcardtype,
+					'creditcardnumber'=>$creditcardnumber,
+					'firstname'=>$firstname,
+					'lastname'=>$lastname,
+					'date'=>$date,
+					'country'=>$country,
+					'address'=>$address,
+					'amount'=>$amount
+				
+				));
+					
+	
+				echo "<p class = 'alert alert-success'>your order will arrive as soon as possible </p>";
 				
 				
 				
@@ -446,12 +492,24 @@ if(!empty($creditcardnumber)||
 }
 
 
-function trash($id){
-	
-	$query = "DELETE FROM Transactions WHERE TransactionID =".$id;
-	$result = db_result($query);
-}
 
+function get_orders(){
+	
+	session_start();
+	
+	$userid = $_SESSION['user_id'];
+	$query = "SELECT * FROM orders WHERE userid = '$userid'";
+	$result = db_result($query);
+	$data = array();
+	
+	while($row = mysqli_fetch_object($result)){
+		
+		$data[] = $row;
+	}
+	
+	return $data;
+
+}
 	
 
 function get_country(){

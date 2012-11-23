@@ -1,3 +1,4 @@
+<div class = "span6">
 <form action ="#" method ="post" id = "payment">
 <legend>Bill Information</legend>
 	<div>
@@ -19,7 +20,6 @@
 		<label>Lastname</label>
 		<input id = "lastname" type = "text" name ="lastname">
 	</div>
-	
 	<div>
 		<label>County</label>
 		<select name = "country">
@@ -39,3 +39,6 @@
 	
 	<input class = "btn btn-info" type = "submit" value = "BUY">
 </form>
+<div class = "span4" id = "paymentmessage"></div>
+</div>
+<script type = "text/javascript" src = "js/pay.js"></script>

@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang ="en">
 <head>
-	<meta charset="UTF-8">
-	 <link href="css/bootstrap.min.css" rel="stylesheet">
+     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	 <link href="css/bootstrap-responsive.css" rel="stylesheet">
+	 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	 <link href = "css/global.css" rel = "stylesheet">
 	<title>Pharmacy</title>
 </head>
 <body id = "body">	
 <div class="navbar navbar-inverse">
-  <div class="navbar-inner">
+  <div id = "navbarinverse" class="navbar-inner">
     <div class="container">
  
       <!-- Be sure to leave the brand out there if you want it shown -->

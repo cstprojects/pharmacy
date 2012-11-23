@@ -1,3 +1,7 @@
+ <div class = "span2 offset1">
+ <div class = "page-header">
+	<h1><small>Last Added</small></h1>
+</div>
  <ul class="thumbnails lastadded">
   <?php foreach($result as $value): ?>
   <li>
@@ -43,6 +47,7 @@
   </li>
 <?php endforeach; ?>  
 </ul>
+</div>
 
 		
 

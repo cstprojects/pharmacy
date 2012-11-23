@@ -48,8 +48,7 @@
 			
 			productquantity: this.quantity.value,
 			productprice: document.getElementById("productPrice").innerHTML,
-			productname: document.getElementById("productName").innerHTML,
-			user: document.getElementById("user_id").innerHTML
+			productname: document.getElementById("productName").innerHTML
 
 		};
 		

@@ -6,3 +6,4 @@ include 'model.php';
 
 $result = trash($_POST['id']);
 
+

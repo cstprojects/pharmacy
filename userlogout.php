@@ -4,4 +4,4 @@ include 'model.php';
 include 'functions.php';
 
 userlogout();
-header('Location: /pharmacy'); 
+header('Location: index.php'); 

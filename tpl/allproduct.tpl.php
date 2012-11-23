@@ -1,3 +1,4 @@
+<div class = "span6">
 <?php foreach($result as $value): ?>
 <table class = "table table-bordered table-hover">
 	<th>
@@ -20,4 +21,5 @@
 	</tr>
 
 </table>
-<?php endforeach; ?>	
+<?php endforeach; ?>
+</div>	

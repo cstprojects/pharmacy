@@ -48,10 +48,15 @@ text-align:left;
 }
 
 
-#cart_link{
+
+
+#navbarinverse{
 	
-	text-decoration:none;
-	color:white;
+	border-radius:0;
+}
 
 
+.footer{
+	background: #49AFCD;
+	padding: 30px;
 }

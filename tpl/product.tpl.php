@@ -1,3 +1,4 @@
+<div class = "span9">
 <?php foreach($result as $value): ?>
 	
 <div class = "container-fluid">
@@ -38,6 +39,10 @@
 </div>	
 
 </div>
-<?php endforeach; ?>	
+<?php endforeach; ?>
+</div>
+<script type = "text/javascript" src = "js/cart.js"></script>
+	
+
 	
 	

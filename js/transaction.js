@@ -1,14 +1,14 @@
 (function(){
 	
 	
-	var addtocart = function(product) {
+	var addtrans = function(info) {
     var data = [];
     
-    for (var i in product) {
+    for (var i in info) {
       data.push(
         encodeURIComponent(i) 
         + "=" +
-        encodeURIComponent(product[i])
+        encodeURIComponent(info[i])
       );
     }
     
@@ -41,15 +41,9 @@
 	form.onsubmit = function(e){
 		
 		e.preventDefault();
-		
-		var node = document.getElementById("user_id");
-		var user_id = 0;
 
-		if (node) {
-		   user_id = parseInt(node.innerHTML);
-		}
 		
-		var product = {
+		var info = {
 			
 			productquantity: this.quantity.value,
 			productprice: document.getElementById("productPrice").innerHTML,
@@ -58,10 +52,10 @@
 
 		};
 		
-		addtocart(product);
+		addtrans(info);
 		
 		
-		document.location.reload(true);
+		//document.location.reload(true);
 		
 		
 		return false;
