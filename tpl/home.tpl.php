@@ -33,8 +33,10 @@
 	</div>
 </div>
 <div>
+
 	<?php print embed('tpl/footer.tpl.php',array()); ?>
-</div>			
+</div>
+	<script type = "text/javascript" src = "js/admin.js"></script>			
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>	
 	<script type="text/javascript" src="js/search.js"></script>

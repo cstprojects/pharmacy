@@ -47,6 +47,20 @@ if(empty($username) || empty($passwordone) || empty($passwordtwo) || empty($full
 	}
 }
 
+function get_all_user(){
+	
+	$query = "SELECT * FROM users";
+	$result = db_result($query);
+	$data = array();
+	
+	while($row = mysqli_fetch_object($result)){
+		$data[] = $row;
+	}
+	
+	return $data;
+	
+}
+
 function login($username,$password){
 
 $message = null;
@@ -97,7 +111,7 @@ function loggedin(){
 	
 	}else{
 
-		header('Location: /pharmacy');
+		header('Location: home.php');
 
 	}
 	
@@ -117,7 +131,7 @@ function userlogout(){
 function get_drug($drug){
 
 
-$query = "SELECT productID, productIMG,productName,Price FROM Products 
+$query = "SELECT productID, productIMG,productName,Price,quantity FROM Products 
 		  WHERE productName LIKE '%$drug%' OR productDetails LIKE '%$drug%'";
 	$result = db_result($query);
 	
@@ -432,7 +446,7 @@ if(!empty($creditcardnumber)||
 			
 				$name = $row['productName'];
 				$quantity = $row['productQuantity'];
-				
+				$price = $row['productPrice'];
 				$order = db_insert('orders',array(
 					
 					'productName'=>$name,
@@ -442,7 +456,19 @@ if(!empty($creditcardnumber)||
 					
 				));
 				
+				$transactions = db_insert('Transactions',array(
+					
+					'productPrice'=>$price,
+					'productQuantity'=>$quantity,
+					'userid'=>$_SESSION['user_id'],
+					'productName'=>$name,
+					'date'=>$date 
+				
+				));
+				
 				}
+				
+				
 	
 				
 				$query = "DELETE FROM cart";
@@ -509,6 +535,20 @@ function get_orders(){
 	
 	return $data;
 
+}
+
+function get_transactions(){
+	
+	$query = "SELECT * FROM Transactions";
+	$result = db_result($query);
+	$data = array();
+	while($row = mysqli_fetch_object($result)){
+		
+		$data[] = $row;
+		
+	}
+	
+	return $data;
 }
 	
 

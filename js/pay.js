@@ -60,7 +60,7 @@
 			this.address.value='';
 			this.amount.value='';
 			
-			//setTimeout("location.reload(true);",3000);
+			setTimeout("location.reload(true);",3000);
 			return false;	
 			
 		};

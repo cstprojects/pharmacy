@@ -25,7 +25,6 @@
     client.onreadystatechange = function() {
       if (client.readyState == 4 && client.status == 200) {
 			resp = client.responseText;
-			document.getElementById("resp").innerHTML = resp;
       }
     };
     
@@ -54,24 +53,25 @@
 		
 		
 		if(document.getElementById("aval").innerHTML != "Not Available"){
+			if(this.quantity.value<=0){
 		
-			if(this.quantity.value <= document.getElementById("aval").innerHTML.match(/\d+/g) &&
-				document.getElementById("aval").innerHTML.match(/\d+/g)>=1
-			){
-	 
+				alert("we cant add");
+			
+		}else{
+		
+		if(this.quantity.value<=document.getElementById("aval").innerHTML.match(/\d+/g)){
+
 		addtocart(product);
-		
-		
-		document.location.reload(true);
-		
+				
+		//document.location.reload(true);
 		
 		return false;
 		
-			}
 		}
 		
+		}
 		this.quantity.value = '';
-		
+		}	
 	};
 
 })();
