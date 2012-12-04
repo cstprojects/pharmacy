@@ -63,7 +63,7 @@
 
 		addtocart(product);
 				
-		//document.location.reload(true);
+		document.location.reload(true);
 		
 		return false;
 		

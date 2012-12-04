@@ -1,6 +1,7 @@
 <div class = "span6">
 <form action ="#" method ="post" id = "payment">
 <legend>Bill Information</legend>
+<img src="img/visamast.png" width="100" height="100"> 
 	<div>
 		<label>Credit Card Type</label>
 		<select name = "creditcardtype">
